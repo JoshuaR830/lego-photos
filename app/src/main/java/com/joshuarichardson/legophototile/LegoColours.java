@@ -1,6 +1,28 @@
 package com.joshuarichardson.legophototile;
 
 public class LegoColours {
+    public static final RGBColor[] studColors = new RGBColor[] {
+            new RGBColor(Black.RED, Black.GREEN, Black.BLUE),
+            new RGBColor(Blue.RED, Blue.GREEN, Blue.BLUE),
+            new RGBColor(BrightGreen.RED, BrightGreen.GREEN, BrightGreen.BLUE),
+            new RGBColor(BrightPink.RED, BrightPink.GREEN, BrightPink.BLUE),
+            new RGBColor(DarkBluishGray.RED, DarkBluishGray.GREEN, DarkBluishGray.BLUE),
+            new RGBColor(DarkPurple.RED, DarkPurple.GREEN, DarkPurple.BLUE),
+            new RGBColor(FlatSilver.RED, FlatSilver.GREEN, FlatSilver.BLUE),
+            new RGBColor(Green.RED, Green.GREEN, Green.BLUE),
+            new RGBColor(LightBluishGray.RED, LightBluishGray.GREEN, LightBluishGray.BLUE),
+            new RGBColor(Lime.RED, Lime.GREEN, Lime.BLUE),
+            new RGBColor(MediumAzure.RED, MediumAzure.GREEN, MediumAzure.BLUE),
+            new RGBColor(OliveGreen.RED, OliveGreen.GREEN, OliveGreen.BLUE),
+            new RGBColor(Orange.RED, Orange.GREEN, Orange.BLUE),
+            new RGBColor(PearlGold.RED, PearlGold.GREEN, PearlGold.BLUE),
+            new RGBColor(Red.RED, Red.GREEN, Red.BLUE),
+            new RGBColor(ReddishBrown.RED, ReddishBrown.GREEN, ReddishBrown.BLUE),
+            new RGBColor(Tan.RED, Tan.GREEN, Tan.BLUE),
+            new RGBColor(TransDarkBlue.RED, TransDarkBlue.GREEN, TransDarkBlue.BLUE),
+            new RGBColor(White.RED, White.GREEN, White.BLUE),
+    };
+
     public static final int[] redList = new int[] {
             LegoColours.Black.RED,
             LegoColours.Blue.RED,

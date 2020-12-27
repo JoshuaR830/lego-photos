@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.joshuarichardson.legophototile.ui.displayTiles.DisplayTilesFragment;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int STUD_WIDTH = 24;
     public static final int STUD_HEIGHT = 24;
+    public int[] pixelsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_picture_creator, R.id.navigation_display_tiles)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Intent something = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 
         startActivityForResult(something, SELECT_IMAGE_ID);
+
     }
 
     @Override
@@ -114,6 +119,13 @@ public class MainActivity extends AppCompatActivity {
             legoImage.setImageBitmap(bitmap);
             legoConvert.setImageBitmap(bitmap2);
             legoStuds.setImageBitmap(studBitmap);
+
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.nav_host_fragment, DisplayTilesFragment.class, null);
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
 
 
@@ -210,7 +222,23 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+            RGBColor pixelRGB = new RGBColor(R, G, B);
 
+            double bestSimilarity = 1000;
+            RGBColor mostSimilar = LegoColours.studColors[0];
+
+            for (RGBColor color : LegoColours.studColors) {
+                double similarity = getDistance(pixelRGB, color);
+
+                if(similarity < bestSimilarity) {
+                    bestSimilarity = similarity;
+                    mostSimilar = color;
+                }
+            }
+
+            pixels[i] = (0xff) << 24 | (mostSimilar.red & 0xff) << 16 | (mostSimilar.green & 0xff) << 8 | (mostSimilar.blue & 0xff);
+
+            this.pixelsList = pixels;
             Log.d("Original red", String.valueOf(R));
             Log.d("Closest red", String.valueOf(closestRed));
 
@@ -219,6 +247,11 @@ public class MainActivity extends AppCompatActivity {
 
         studBitmap.setPixels(pixels, 0, STUD_WIDTH, 0, 0, STUD_WIDTH, STUD_HEIGHT);
         return studBitmap;
+    }
+
+    public double getDistance(RGBColor pixelColour, RGBColor stud) {
+//        return Math.sqrt(Math.pow(pixelColour.red - stud.red, 2) + Math.pow(pixelColour.green - stud.green, 2) + Math.pow(pixelColour.blue - stud.blue, 2));
+        return Math.abs(pixelColour.red - stud.red) + Math.abs(pixelColour.green - stud.green) + Math.abs(pixelColour.blue - stud.blue);
     }
 
     public int getClosestColor(ArrayList<Integer> list, int colorToMatch) {

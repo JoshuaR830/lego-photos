@@ -3,30 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_display_tiles">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.joshuarichardson.legophototile.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_home"-->
+<!--        android:name="com.joshuarichardson.legophototile.ui.home.HomeFragment"-->
+<!--        android:label="@string/title_home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.joshuarichardson.legophototile.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_dashboard"-->
+<!--        android:name="com.joshuarichardson.legophototile.ui.dashboard.DashboardFragment"-->
+<!--        android:label="@string/title_dashboard"-->
+<!--        tools:layout="@layout/fragment_dashboard" />-->
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.joshuarichardson.legophototile.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_notifications"-->
+<!--        android:name="com.joshuarichardson.legophototile.ui.notifications.NotificationsFragment"-->
+<!--        android:label="@string/title_notifications"-->
+<!--        tools:layout="@layout/fragment_notifications" />-->
 
     <fragment
         android:id="@+id/navigation_picture_creator"
         android:name="com.joshuarichardson.legophototile.ui.pictureCreator.PictureCreatorFragment"
         android:label="@string/title_picture_creator"
         tools:layout="@layout/fragment_picture_creator"/>
+
+    <fragment
+        android:id="@+id/navigation_display_tiles"
+        android:name="com.joshuarichardson.legophototile.ui.displayTiles.DisplayTilesFragment"
+        android:label="@string/title_display_tiles"
+        tools:layout="@layout/fragment_display_tiles"/>
 
 </navigation>
